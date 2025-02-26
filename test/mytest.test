@@ -1,0 +1,3 @@
+<launch>
+    <test test-name="mytest" pkg="mocap_nokov" type="mytest.py" />
+</launch>
