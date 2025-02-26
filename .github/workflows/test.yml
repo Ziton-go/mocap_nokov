@@ -18,8 +18,8 @@ jobs:
       matrix:
         # Define which ROS distributions to test based on the branch
         ros_distribution:
-          - melodic
           - noetic
+          - galactic
           - humble
           - iron
           - jazzy
@@ -27,14 +27,15 @@ jobs:
         include:
           # Noetic for ROS 1 (master branch)
           - docker_image: ubuntu:focal
-            ros_distribution: melodic
-            ros_version: 1
-            branch: master
-          # Noetic for ROS 1 (master branch)
-          - docker_image: ubuntu:focal
             ros_distribution: noetic
             ros_version: 1
             branch: master
+
+          # Galactic for ROS 2 (ros2 branch)
+          - docker_image: ubuntu:jammy
+            ros_distribution: galactic
+            ros_version: 2
+            branch: ros2
 
           # Humble for ROS 2 (ros2 branch)
           - docker_image: ubuntu:jammy
