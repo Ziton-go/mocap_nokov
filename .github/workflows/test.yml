@@ -81,11 +81,11 @@ jobs:
         if: ${{ matrix.ros_version == 1 }}
         uses: ros-tooling/action-ros-ci@v0.3
         with:
-          package-name: YOUR_PACKAGE_HERE MORE_PACKAGES_HERE
+          package-name: mocap_nokov
           target-ros1-distro: ${{ matrix.ros_distribution }}
       - name: build and test ROS 2
         if: ${{ matrix.ros_version == 2 }}
         uses: ros-tooling/action-ros-ci@v0.3
         with:
-          package-name: YOUR_PACKAGE_HERE MORE_PACKAGES_HERE
+          package-name: mocap_nokov
           target-ros2-distro: ${{ matrix.ros_distribution }}
