@@ -33,5 +33,6 @@ jobs:
             git clone https://github.com/NOKOV-MOCAP/mocap_nokov.git &&
             cd .. &&
             rosdep install --from-paths src -y --ignore-src &&
+            source /opt/ros/noetic/setup.bash &&
             catkin_make --packages-select mocap_nokov
           "
