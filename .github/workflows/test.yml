@@ -8,24 +8,6 @@ on:
   workflow_dispatch: 
   
 jobs:
-  test: # Docker is not supported on macOS and Windows.
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macOS-latest, windows-latest]
-        ros_distribution: # Only include ROS 2 distributions, as ROS 1 does not support macOS and Windows.
-          - humble
-          - iron
-    steps:
-      - uses: ros-tooling/setup-ros@v0.7
-        with:
-          required-ros-distributions: ${{ matrix.ros_distribution }}
-      - name: build and test
-        uses: ros-tooling/action-ros-ci@v0.3
-        with:
-          package-name: YOUR_PACKAGE_HERE MORE_PACKAGES_HERE
-          target-ros2-distro: ${{ matrix.ros_distribution }}
-
   test_docker: # On Linux, iterates on all ROS 1 and ROS 2 distributions.
     runs-on: ubuntu-latest
     strategy:
