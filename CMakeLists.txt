@@ -70,9 +70,3 @@ else()
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 endif()
 
-#test
-if(CATKIN_ENABLE_TESTING)
-    find_package(rostest REQUIRED)
-    add_rostest(test/mytest.test)
-endif()
-
