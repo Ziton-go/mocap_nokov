@@ -9,7 +9,7 @@ on:
 
 jobs:
   noetic_arm32_build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       # 安装 QEMU 并启用多架构支持
       - name: Install QEMU
