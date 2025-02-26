@@ -1,5 +1,5 @@
-![melodic](https://github.com/yuxuanwu1234567/mocap_nokov/actions/workflows/melodic.yml/badge.svg)
-![noetic](https://github.com/yuxuanwu1234567/mocap_nokov/actions/workflows/noetic.yml/badge.svg)
+![melodic](https://github.com/Ziton-go/mocap_nokov/actions/workflows/melodic.yml/badge.svg)
+![noetic](https://github.com/Ziton-go/mocap_nokov/actions/workflows/noetic.yml/badge.svg)
 
 # mocap_nokov
 ROS nodes for working with the Nokov motion capture system
@@ -60,3 +60,5 @@ roslaunch mocap_nokov mocap.launch
 /mocap_node/<tracker_name>/Odom
 ```
 where `<tracker_name>` is usually the name of your tracked objects.
+
+

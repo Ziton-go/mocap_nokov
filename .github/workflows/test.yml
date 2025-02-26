@@ -1,0 +1,82 @@
+name: test_build
+
+on:
+  push:
+    branches:
+      - master
+      - ros2  # Trigger for ROS 2 branch
+  pull_request:
+    branches:
+      - master
+      - ros2  # Trigger for ROS 2 branch
+  workflow_dispatch:
+
+jobs:
+  test_docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Define which ROS distributions to test based on the branch
+        ros_distribution:
+          - noetic
+          - humble
+          - iron
+          - jazzy
+          - rolling
+        include:
+          # Noetic for ROS 1 (master branch)
+          - docker_image: ubuntu:focal
+            ros_distribution: noetic
+            ros_version: 1
+            branch: master
+            
+          # Humble for ROS 2 (ros2 branch)
+          - docker_image: ubuntu:jammy
+            ros_distribution: humble
+            ros_version: 2
+            branch: ros2
+
+          # Iron for ROS 2 (ros2 branch)
+          - docker_image: ubuntu:jammy
+            ros_distribution: iron
+            ros_version: 2
+            branch: ros2
+
+          # Jazzy for ROS 2 (ros2 branch)
+          - docker_image: ubuntu:noble
+            ros_distribution: jazzy
+            ros_version: 2
+            branch: ros2
+
+          # Rolling for ROS 2 (ros2 branch)
+          - docker_image: ubuntu:noble
+            ros_distribution: rolling
+            ros_version: 2
+            branch: ros2
+
+    container:
+      image: ${{ matrix.docker_image }}
+    
+    steps:
+      # Set up the ROS environment based on the ROS distribution
+      - name: setup ROS environment
+        uses: ros-tooling/setup-ros@v0.7
+        with:
+          required-ros-distributions: ${{ matrix.ros_distribution }}
+
+      # Build and test for ROS 1, but only when the branch is 'master'
+      - name: build and test ROS 1
+        if: ${{ matrix.ros_version == 1 && github.ref == 'refs/heads/master' }}
+        uses: ros-tooling/action-ros-ci@v0.3
+        with:
+          package-name: mocap_nokov
+          target-ros1-distro: ${{ matrix.ros_distribution }}
+          
+      # Build and test for ROS 2, but only when the branch is 'ros2'
+      - name: build and test ROS 2
+        if: ${{ matrix.ros_version == 2 && github.ref == 'refs/heads/ros2' }}
+        uses: ros-tooling/action-ros-ci@v0.3
+        with:
+          package-name: mocap_nokov
+          target-ros2-distro: ${{ matrix.ros_distribution }}
+          skip-tests: true
